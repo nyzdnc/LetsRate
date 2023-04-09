@@ -1,14 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddRateFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="200dp"
+        android:src="@drawable/camera_vector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <RatingBar
+        android:id="@+id/addRateRatingBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvCommentTitle"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/input_bg"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="start"
+        android:padding="5dp"
+        android:text="Comment Title"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addRateRatingBar" />
+
+    <TextView
+        android:id="@+id/tvComment"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_bg"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="start"
+        android:padding="5dp"
+        android:text="Comment"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSellerName" />
+
+    <TextView
+        android:id="@+id/tvSellerName"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_bg"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="start"
+        android:padding="5dp"
+        android:text="Seller Name"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
+
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_bg"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="start"
+        android:padding="5dp"
+        android:text="Product Name"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCommentTitle" />
+
+    <EditText
+        android:id="@+id/inputCommentTitle"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="start"
+        android:hint="Type a comment title"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textColorHint="#039BE5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvCommentTitle"
+        app:layout_constraintTop_toBottomOf="@+id/addRateRatingBar" />
+
+    <EditText
+        android:id="@+id/inputProductName"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="start"
+        android:hint="Type the product name"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textColorHint="#039BE5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/tvProductName"
+        app:layout_constraintTop_toBottomOf="@+id/inputCommentTitle" />
+
+    <EditText
+        android:id="@+id/inputComment"
+        android:layout_width="230dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="start"
+        android:hint="Type a comment about your rate"
+        android:inputType="textMultiLine"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textColorHint="#039BE5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/tvComment"
+        app:layout_constraintTop_toBottomOf="@+id/inputSellerName" />
+
+    <EditText
+        android:id="@+id/inputSellerName"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="start"
+        android:hint="Type the seller name"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textColorHint="#039BE5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/tvSellerName"
+        app:layout_constraintTop_toBottomOf="@+id/inputProductName" />
+
+    <Button
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="ADD RATE"
+        android:layout_marginTop="10dp"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:fontFamily="sans-serif-light"
+        android:background="@drawable/add_rate_bg"
+        app:layout_constraintEnd_toEndOf="@+id/inputComment"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/inputComment"
+        app:layout_constraintTop_toBottomOf="@+id/inputComment" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
