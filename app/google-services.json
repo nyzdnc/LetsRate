@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "110297830475",
+    "project_id": "letsrate-483b7",
+    "storage_bucket": "letsrate-483b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110297830475:android:f05da6baf285ac46ae29ce",
+        "android_client_info": {
+          "package_name": "com.example.letsrate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110297830475-lq1r48nv1ilh4rj9osvcpi8mnr8jbol5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA8qY_Nvdr6X_BUiBDCaf933hkLuVSKHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110297830475-lq1r48nv1ilh4rj9osvcpi8mnr8jbol5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
