@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="horizontal"
+    android:background="@drawable/recyclerview_bg"
+    >
+
+
+    <ImageView
+        android:id="@+id/recyclerRowImageBox"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="5dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/recyclerRowProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:textColor="#2196F3"/>
+        <TextView
+            android:id="@+id/recyclerRowCommentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comment Title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:textColor="#E30606"/>
+        <TextView
+            android:id="@+id/recyclerRowSellerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seller Name"
+            android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/recyclerRowEventDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event descriptions"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="2"
+            android:lines="2"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

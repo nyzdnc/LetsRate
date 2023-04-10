@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment"
+    tools:context=".view.LoginFragment"
     android:background="#EED4D4D8">
 
     <TextView
@@ -69,7 +69,7 @@
         android:background="@drawable/input_bg"
         android:textAlignment="center"
         android:textColorHint="#039BE5"
-        android:inputType="text"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -104,7 +104,7 @@
         android:layout_marginTop="10dp"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSignUp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -124,14 +124,14 @@
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/architects_daughter"
         android:gravity="center"
+        android:paddingStart="30dp"
         android:text="Let's Rate"
         android:textAlignment="center"
         android:textColor="#039BE5"
         android:textSize="50sp"
-        android:paddingStart="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
