@@ -86,6 +86,7 @@ class AddRateFragment : Fragment() {
                         rateMap.put("comment" , binding.inputComment.text.toString())
                         rateMap.put("downloadUrl" , downloadUrl)
                         rateMap.put("createdDate" , Timestamp.now())
+                        rateMap.put("rate" , binding.addRateRatingBar.rating.toString())
 
                         firestore.collection("Ratings").add(rateMap)
                             .addOnSuccessListener {

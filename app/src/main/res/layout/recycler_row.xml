@@ -8,33 +8,68 @@
     android:background="@drawable/recyclerview_bg"
     >
 
-
-    <ImageView
-        android:id="@+id/recyclerRowImageBox"
+    <LinearLayout
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="5dp" />
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/recyclerRowImageBox"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center|top"
+            android:layout_marginEnd="10dp">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/my_rates"/>
+
+            <TextView
+                android:id="@+id/recyclerRowRatePoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#1951DF" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_height="150dp"
+        android:layout_margin="5dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/recyclerRowProductName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight=".20"
             android:text="Product Name"
             android:textSize="20sp"
             android:layout_marginStart="10dp"
             android:textStyle="bold"
             android:textColor="#2196F3"/>
+
         <TextView
             android:id="@+id/recyclerRowCommentTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight=".20"
             android:text="Comment Title"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -43,21 +78,22 @@
         <TextView
             android:id="@+id/recyclerRowSellerName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight=".20"
             android:text="Seller Name"
             android:textSize="14sp"
             android:layout_marginStart="10dp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/recyclerRowEventDescription"
+            android:id="@+id/recyclerRowCommentDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Event descriptions"
+            android:layout_height="0dp"
+            android:layout_weight=".40"
+            android:text="Comment descriptions"
             android:textSize="12sp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:maxLines="2"
+            android:maxLines="5"
             android:lines="2"/>
 
 

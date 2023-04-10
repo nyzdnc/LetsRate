@@ -7,5 +7,6 @@ data class RateModel (
     val comment : String,
     val rate : String,
     val downloadUrl : String,
+    val userEmail : String
 
         )
