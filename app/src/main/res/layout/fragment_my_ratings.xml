@@ -5,18 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.HomeFragment">
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#DCFFFFFF"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search any Product or Seller"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".view.MyRatingsFragment">
 
     <TextView
         android:id="@+id/textView3"
@@ -24,27 +13,22 @@
         android:layout_height="wrap_content"
         android:background="@drawable/homepage_top_title_bg"
         android:fontFamily="serif-monospace"
-        android:text="ALL RATINGS"
-        android:textAlignment="center"
+        android:text="MY RATINGS"
         android:textColor="#2962FF"
         android:textStyle="bold"
+        android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homePageRecyclerView"
+        android:id="@+id/myEventsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

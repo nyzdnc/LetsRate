@@ -10,26 +10,27 @@
 
     <LinearLayout
         android:layout_width="100dp"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        >
+        android:layout_marginTop="5dp">
 
         <ImageView
             android:id="@+id/recyclerRowImageBox"
             android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_height="100dp"
+            android:layout_gravity="top"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center|top"
-            android:layout_marginEnd="10dp">
+            android:orientation="vertical"
+            android:gravity="center|top">
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/my_rates"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/my_rates"
+                android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/recyclerRowRatePoint"
@@ -40,25 +41,25 @@
                 android:textStyle="bold"
                 android:textColor="#1951DF" />
 
-
         </LinearLayout>
-
-
     </LinearLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Product Name"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"/>
 
         <TextView
             android:id="@+id/recyclerRowProductName"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".20"
+            android:layout_height="wrap_content"
             android:text="Product Name"
             android:textSize="20sp"
             android:layout_marginStart="10dp"
@@ -66,35 +67,59 @@
             android:textColor="#2196F3"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Comment Title"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
             android:id="@+id/recyclerRowCommentTitle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".20"
+            android:layout_height="wrap_content"
             android:text="Comment Title"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginStart="10dp"
-            android:textColor="#E30606"/>
+            android:textColor="#2196F3"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Seller Name"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"/>
         <TextView
             android:id="@+id/recyclerRowSellerName"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".20"
+            android:layout_height="wrap_content"
             android:text="Seller Name"
+            android:textColor="#2196F3"
             android:textSize="14sp"
             android:layout_marginStart="10dp"
             android:textStyle="bold"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Commet Details"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
             android:id="@+id/recyclerRowCommentDescription"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".40"
+            android:layout_height="wrap_content"
             android:text="Comment descriptions"
-            android:textSize="12sp"
+            android:textColor="#2196F3"
+            android:textSize="13sp"
+            android:textStyle="bold"
             android:layout_marginStart="10dp"
-            android:maxLines="5"
-            android:lines="2"/>
+            android:maxLines="3"
+            android:lines="5"/>
 
 
     </LinearLayout>

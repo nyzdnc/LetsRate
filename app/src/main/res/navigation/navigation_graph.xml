@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_ratingDetailFragment"
+            app:destination="@id/ratingDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addRateFragment"
@@ -52,5 +55,31 @@
         <action
             android:id="@+id/action_profileFragment_to_addRateFragment"
             app:destination="@id/addRateFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_myRatingsFragment"
+            app:destination="@id/myRatingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/myRatingsFragment"
+        android:name="com.example.letsrate.view.MyRatingsFragment"
+        android:label="fragment_my_ratings"
+        tools:layout="@layout/fragment_my_ratings" >
+        <action
+            android:id="@+id/action_myRatingsFragment_to_addRateFragment"
+            app:destination="@id/addRateFragment" />
+        <action
+            android:id="@+id/action_myRatingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_myRatingsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_myRatingsFragment_to_ratingDetailFragment"
+            app:destination="@id/ratingDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ratingDetailFragment"
+        android:name="com.example.letsrate.view.RatingDetailFragment"
+        android:label="fragment_rating_detail"
+        tools:layout="@layout/fragment_rating_detail" />
 </navigation>

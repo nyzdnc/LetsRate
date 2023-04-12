@@ -49,57 +49,62 @@ class LoginFragment : Fragment() {
 
 
         binding.buttonSignUp.setOnClickListener {
-            val email = binding.inputEmail.text.toString()
-            val password = binding.inputPassword.text.toString()
-
-            if( email.equals("") || password.equals("") ){
-
-                Toast.makeText(this.context,"Please fill the e-mail and password !",Toast.LENGTH_LONG).show()
-
-            } else {
-
-                auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener {
-                    val userMap = hashMapOf<String, String>()
-
-                    userMap.put("userEmail", email)
-                    userMap.put("userPassword", password)
-
-                    firebase.collection("Users").add(userMap)
-
-                    val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                    Navigation.findNavController(binding.root).navigate(action)
-
-                }.addOnFailureListener {
-                    Toast.makeText(this.context,it.localizedMessage, Toast.LENGTH_LONG).show()
-                }
-            }
+            createUser()
 
         }
 
         binding.buttonLogin.setOnClickListener {
-
-            val email = binding.inputEmail.text.toString()
-            val password = binding.inputPassword.text.toString()
-
-            if( email.equals("") || password.equals("") ){
-
-                Toast.makeText(this.context,"Please fill the e-mail and password !",Toast.LENGTH_LONG).show()
-
-            } else {
-
-                auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
-
-                    val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                    Navigation.findNavController(binding.root).navigate(action)
-
-                }.addOnFailureListener {
-                    Toast.makeText(this.context,it.localizedMessage, Toast.LENGTH_LONG).show()
-                }
-            }
-
-
+            login()
         }
 
+    }
+
+    private fun createUser(){
+        val email = binding.inputEmail.text.toString()
+        val password = binding.inputPassword.text.toString()
+
+        if( email.equals("") || password.equals("") ){
+
+            Toast.makeText(this.context,"Please fill the e-mail and password !",Toast.LENGTH_LONG).show()
+
+        } else {
+
+            auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener {
+                val userMap = hashMapOf<String, String>()
+
+                userMap.put("userEmail", email)
+                userMap.put("userPassword", password)
+
+                firebase.collection("Users").add(userMap)
+
+                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                Navigation.findNavController(binding.root).navigate(action)
+
+            }.addOnFailureListener {
+                Toast.makeText(this.context,it.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun login(){
+        val email = binding.inputEmail.text.toString()
+        val password = binding.inputPassword.text.toString()
+
+        if( email.equals("") || password.equals("") ){
+
+            Toast.makeText(this.context,"Please fill the e-mail and password !",Toast.LENGTH_LONG).show()
+
+        } else {
+
+            auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
+
+                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                Navigation.findNavController(binding.root).navigate(action)
+
+            }.addOnFailureListener {
+                Toast.makeText(this.context,it.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
 }

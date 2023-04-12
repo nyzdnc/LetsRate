@@ -8,15 +8,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.letsrate.databinding.FragmentAddRateBinding
 import com.google.android.material.snackbar.Snackbar
@@ -29,6 +30,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import java.util.*
+
 
 class AddRateFragment : Fragment() {
     private lateinit var binding : FragmentAddRateBinding
@@ -60,7 +62,13 @@ class AddRateFragment : Fragment() {
         auth = Firebase.auth
         storage = Firebase.storage
 
+        /* binding.addRateRatingBar.setOnRatingBarChangeListener(OnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            binding.myEventsPoint.text = "$rating"
+        }) */
 
+        binding.addRateRatingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            binding.myEventsPoint.text = rating.toString()
+        }
 
         binding.buttonAddRate.setOnClickListener {
 
@@ -71,38 +79,51 @@ class AddRateFragment : Fragment() {
             val imageReference = reference.child("images").child(imageName)
 
             if(selectedPicture != null){
-                imageReference.putFile(selectedPicture!!).addOnSuccessListener {
 
-                    val uploadPictureReference = storage.reference.child("images").child(imageName)
-                    uploadPictureReference.downloadUrl.addOnSuccessListener {
+                if( binding.inputSellerName.equals("") ||
+                            binding.inputProductName.equals("") ||
+                            binding.inputCommentTitle.equals("") ||
+                            binding.inputCommentTitle.equals("") ||
+                            binding.addRateRatingBar.rating == 0.0f
+                    ){
+                    Toast.makeText(binding.root.context,"Please fill in all values.",Toast.LENGTH_LONG).show()
+                } else {
 
-                        val downloadUrl = it.toString()
-                        val rateMap = hashMapOf<String , Any>()
+                    imageReference.putFile(selectedPicture!!).addOnSuccessListener {
 
-                        rateMap.put("userEmail" , auth.currentUser!!.email!!)
-                        rateMap.put("commentTitle" , binding.inputCommentTitle.text.toString())
-                        rateMap.put("productName" , binding.inputProductName.text.toString())
-                        rateMap.put("sellerName" , binding.inputSellerName.text.toString())
-                        rateMap.put("comment" , binding.inputComment.text.toString())
-                        rateMap.put("downloadUrl" , downloadUrl)
-                        rateMap.put("createdDate" , Timestamp.now())
-                        rateMap.put("rate" , binding.addRateRatingBar.rating.toString())
+                        val uploadPictureReference = storage.reference.child("images").child(imageName)
+                        uploadPictureReference.downloadUrl.addOnSuccessListener {
 
-                        firestore.collection("Ratings").add(rateMap)
-                            .addOnSuccessListener {
-                            val action = AddRateFragmentDirections.actionAddRateFragmentToHomeFragment()
-                            Navigation.findNavController(binding.root).navigate(action)
+                            val downloadUrl = it.toString()
+                            val rateMap = hashMapOf<String , Any>()
+
+                            rateMap.put("userEmail" , auth.currentUser!!.email!!)
+                            rateMap.put("commentTitle" , binding.inputCommentTitle.text.toString())
+                            rateMap.put("productName" , binding.inputProductName.text.toString())
+                            rateMap.put("sellerName" , binding.inputSellerName.text.toString())
+                            rateMap.put("comment" , binding.inputComment.text.toString())
+                            rateMap.put("downloadUrl" , downloadUrl)
+                            rateMap.put("createdDate" , Timestamp.now())
+                            rateMap.put("rate" , binding.addRateRatingBar.rating.toString())
+
+                            firestore.collection("Ratings").add(rateMap)
+                                .addOnSuccessListener {
+                                    val action = AddRateFragmentDirections.actionAddRateFragmentToHomeFragment()
+                                    Navigation.findNavController(binding.root).navigate(action)
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(this.context,it.localizedMessage,Toast.LENGTH_LONG).show()
+                                }
+
                         }
-                            .addOnFailureListener {
-                            Toast.makeText(this.context,it.localizedMessage,Toast.LENGTH_LONG).show()
-                        }
 
+                    }.addOnFailureListener {
+                        Toast.makeText(this.context,it.localizedMessage,Toast.LENGTH_LONG).show()
                     }
-
-                }.addOnFailureListener {
-                    Toast.makeText(this.context,it.localizedMessage,Toast.LENGTH_LONG).show()
                 }
-            }
+
+
+            } else{ Toast.makeText(this.context,"Please choose an image.", Toast.LENGTH_LONG).show() }
 
         }
 

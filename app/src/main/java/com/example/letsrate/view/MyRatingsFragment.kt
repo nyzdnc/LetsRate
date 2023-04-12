@@ -1,32 +1,30 @@
 package com.example.letsrate.view
 
 import android.os.Bundle
-import android.provider.Telephony.Mms.Rate
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.letsrate.R
+import com.example.letsrate.adapter.MyRatingRecyclerAdapter
 import com.example.letsrate.adapter.RatingRecyclerAdapter
-import com.example.letsrate.databinding.FragmentHomeBinding
+import com.example.letsrate.databinding.FragmentMyRatingsBinding
 import com.example.letsrate.model.RateModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.util.*
-import kotlin.collections.ArrayList
 
-
-class HomeFragment : Fragment() {
-    private lateinit var binding : FragmentHomeBinding
-    private lateinit var ratingArrayList : ArrayList<RateModel>
+class MyRatingsFragment : Fragment() {
+    private lateinit var binding : FragmentMyRatingsBinding
+    private lateinit var myRatingsArrayList : ArrayList<RateModel>
     private lateinit var firebase : FirebaseFirestore
-    private lateinit var ratingRecyclerAdapter : RatingRecyclerAdapter
-
+    private lateinit var myRatingRecyclerAdapter : MyRatingRecyclerAdapter
+    private lateinit var auth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +36,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentMyRatingsBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -46,63 +44,29 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         firebase = Firebase.firestore
+        auth = Firebase.auth
+        myRatingsArrayList = ArrayList<RateModel>()
 
-        ratingArrayList = ArrayList<RateModel>()
+        binding.myEventsRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        myRatingRecyclerAdapter = MyRatingRecyclerAdapter(myRatingsArrayList)
+        binding.myEventsRecyclerView.adapter = myRatingRecyclerAdapter
 
-        binding.homePageRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        ratingRecyclerAdapter = RatingRecyclerAdapter(ratingArrayList)
-        binding.homePageRecyclerView.adapter = ratingRecyclerAdapter
-
-
-        getDate()
-
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                filterList(newText)
-                return true
-            }
-
-        })
-
-
-
-
+        getData()
     }
 
-    private fun filterList(query: String?) {
-
-        if (query != null) {
-            val filteredList = ArrayList<RateModel>()
-            for (i in ratingArrayList) {
-                if (i.productName.lowercase(Locale.ROOT).contains(query) || i.sellerName.lowercase(Locale.ROOT).contains(query)) {
-                    filteredList.add(i)
-                }
-            }
-
-            if (filteredList.isEmpty()) {
-               // Toast.makeText(this.context, "No Data found", Toast.LENGTH_SHORT).show()
-            } else {
-                ratingRecyclerAdapter.setFilteredList(filteredList)
-            }
-        }
-    }
-
-    private fun getDate(){
+    private fun getData(){
 
         firebase.collection("Ratings").orderBy("createdDate", Query.Direction.DESCENDING).addSnapshotListener { value, error ->
 
             if(error != null){
-                Toast.makeText(this.context,error.localizedMessage,Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context,error.localizedMessage, Toast.LENGTH_LONG).show()
+                println(error.localizedMessage)
             } else {
                 if(!value!!.isEmpty){
 
                     val documents = value.documents
 
-                    ratingArrayList.clear()
+                    myRatingsArrayList.clear()
 
                     for (document in documents){
 
@@ -123,16 +87,23 @@ class HomeFragment : Fragment() {
                             downloadUrl,
                             userEmail)
 
-                        ratingArrayList.add(rating)
+                        if(document.get("userEmail") == auth.currentUser!!.email){
+
+                            myRatingsArrayList.add(rating)
+                        }
+
+
 
 
                     }
 
-                    ratingRecyclerAdapter.notifyDataSetChanged()
+                    myRatingRecyclerAdapter.notifyDataSetChanged()
                 }
             }
         }
     }
+
+
 
 
 }

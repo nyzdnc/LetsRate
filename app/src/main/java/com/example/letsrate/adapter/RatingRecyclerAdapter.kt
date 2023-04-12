@@ -1,13 +1,18 @@
 package com.example.letsrate.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.letsrate.R
 import com.example.letsrate.databinding.RecyclerRowBinding
 import com.example.letsrate.model.RateModel
+import com.example.letsrate.view.HomeFragmentDirections
 
-class RatingRecyclerAdapter(val rateList : ArrayList<RateModel>) : RecyclerView.Adapter <RatingRecyclerAdapter.RateHolder>() {
+class RatingRecyclerAdapter(var rateList : ArrayList<RateModel>) : RecyclerView.Adapter <RatingRecyclerAdapter.RateHolder>() {
 
     class RateHolder(val binding : RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -20,6 +25,7 @@ class RatingRecyclerAdapter(val rateList : ArrayList<RateModel>) : RecyclerView.
 
     override fun onBindViewHolder(holder: RateHolder, position: Int) {
 
+
         holder.binding.recyclerRowCommentTitle.text = rateList.get(position).commentTitle
         holder.binding.recyclerRowProductName.text = rateList.get(position).productName
         holder.binding.recyclerRowSellerName.text = rateList.get(position).sellerName
@@ -27,10 +33,33 @@ class RatingRecyclerAdapter(val rateList : ArrayList<RateModel>) : RecyclerView.
         holder.binding.recyclerRowRatePoint.text = rateList.get(position).rate
         Glide.with(holder.itemView.context).load(rateList.get(position).downloadUrl).into(holder.binding.recyclerRowImageBox)
 
+        holder.itemView.setOnClickListener {
+
+
+            val action = HomeFragmentDirections.actionHomeFragmentToRatingDetailFragment()
+            val bundle = Bundle()
+            bundle.putString("commentTitle", rateList.get(position).commentTitle)
+            bundle.putString("productName", rateList.get(position).productName)
+            bundle.putString("sellerName", rateList.get(position).sellerName)
+            bundle.putString("comment", rateList.get(position).comment)
+            bundle.putString("rate", rateList.get(position).rate)
+            bundle.putString("downloadUrl", rateList.get(position).downloadUrl)
+            action.arguments.putAll(bundle)
+            Navigation.findNavController(it).navigate(action)
+        }
+
+
 
     }
 
     override fun getItemCount(): Int {
        return rateList.size
     }
-}
+
+    fun setFilteredList(mList: ArrayList<RateModel>){
+        this.rateList = mList
+        notifyDataSetChanged()
+    }
+
+
+    }

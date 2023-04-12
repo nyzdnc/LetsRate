@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="serif-monospace"
-            android:text="My Rates"
+            android:text="My Ratings"
             android:textSize="18sp"
             android:textStyle="bold" />
 
