@@ -52,6 +52,7 @@ class MyRatingsFragment : Fragment() {
         binding.myEventsRecyclerView.adapter = myRatingRecyclerAdapter
 
         getData()
+
     }
 
     private fun getData(){

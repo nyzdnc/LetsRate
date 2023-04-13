@@ -62,10 +62,6 @@ class AddRateFragment : Fragment() {
         auth = Firebase.auth
         storage = Firebase.storage
 
-        /* binding.addRateRatingBar.setOnRatingBarChangeListener(OnRatingBarChangeListener { ratingBar, rating, fromUser ->
-            binding.myEventsPoint.text = "$rating"
-        }) */
-
         binding.addRateRatingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
             binding.myEventsPoint.text = rating.toString()
         }

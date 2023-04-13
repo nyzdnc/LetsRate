@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.letsrate.databinding.FragmentRatingDetailBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -56,7 +58,6 @@ class RatingDetailFragment : Fragment() {
 
             binding.buttonDelete.setOnClickListener {
 
-                firebase.collection("Ratings").document(downloadUrl.)
 
 
             }
@@ -67,4 +68,5 @@ class RatingDetailFragment : Fragment() {
 
 
     }
+
 }
