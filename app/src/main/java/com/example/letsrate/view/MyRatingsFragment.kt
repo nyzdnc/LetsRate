@@ -1,17 +1,16 @@
 package com.example.letsrate.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.letsrate.R
 import com.example.letsrate.adapter.MyRatingRecyclerAdapter
-import com.example.letsrate.adapter.RatingRecyclerAdapter
 import com.example.letsrate.databinding.FragmentMyRatingsBinding
 import com.example.letsrate.model.RateModel
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -47,9 +46,10 @@ class MyRatingsFragment : Fragment() {
         auth = Firebase.auth
         myRatingsArrayList = ArrayList<RateModel>()
 
-        binding.myEventsRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.myRatingsRecyclerView.layoutManager = LinearLayoutManager(this.context)
         myRatingRecyclerAdapter = MyRatingRecyclerAdapter(myRatingsArrayList)
-        binding.myEventsRecyclerView.adapter = myRatingRecyclerAdapter
+        binding.myRatingsRecyclerView.adapter = myRatingRecyclerAdapter
+
 
         getData()
 
@@ -57,7 +57,49 @@ class MyRatingsFragment : Fragment() {
 
     private fun getData(){
 
-        firebase.collection("Ratings").orderBy("createdDate", Query.Direction.DESCENDING).addSnapshotListener { value, error ->
+        firebase.collection("Ratings").orderBy("createdDate", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d("test", "${document.id} => ${document.data}")
+                    val comment = document.get("comment") as String
+                    val commentTitle = document.get("commentTitle") as String
+                    val downloadUrl = document.get("downloadUrl") as String
+                    val sellerName = document.get("sellerName") as String
+                    val productName = document.get("productName") as String
+                    val userEmail = document.get("userEmail") as String
+                    val rate = document.get("rate") as String
+                    val rateId = document.id
+                    val createdDate = document.get("createdDate") as Timestamp
+
+                    val rating = RateModel(
+                        commentTitle,
+                        productName,
+                        sellerName,
+                        comment,
+                        rate,
+                        downloadUrl,
+                        userEmail,
+                        rateId,
+                        createdDate
+
+
+                    )
+                        if(userEmail == auth.currentUser!!.email){
+                            myRatingsArrayList.add(rating)
+
+                        }
+
+                }
+                myRatingRecyclerAdapter.notifyDataSetChanged()
+
+
+
+            }.addOnFailureListener {
+                println(it.localizedMessage)
+            }
+
+       /* firebase.collection("Ratings").orderBy("createdDate", Query.Direction.DESCENDING).addSnapshotListener { value, error ->
 
             if(error != null){
                 Toast.makeText(this.context,error.localizedMessage, Toast.LENGTH_LONG).show()
@@ -78,6 +120,7 @@ class MyRatingsFragment : Fragment() {
                         val productName = document.get("productName") as String
                         val userEmail = document.get("userEmail") as String
                         val rate = document.get("rate") as String
+                        val rateId = document.get("rateId") as String
 
                         val rating = RateModel(
                             commentTitle,
@@ -86,7 +129,8 @@ class MyRatingsFragment : Fragment() {
                             comment,
                             rate,
                             downloadUrl,
-                            userEmail)
+                            userEmail,
+                            rateId)
 
                         if(document.get("userEmail") == auth.currentUser!!.email){
 
@@ -101,7 +145,7 @@ class MyRatingsFragment : Fragment() {
                     myRatingRecyclerAdapter.notifyDataSetChanged()
                 }
             }
-        }
+        } */
     }
 
 

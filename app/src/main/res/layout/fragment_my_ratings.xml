@@ -24,7 +24,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myEventsRecyclerView"
+        android:id="@+id/my_ratings_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_myRatingsFragment_to_ratingDetailFragment"
             app:destination="@id/ratingDetailFragment" />
+        <action
+            android:id="@+id/myRatingsFragmentReload"
+            app:destination="@id/myRatingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/ratingDetailFragment"

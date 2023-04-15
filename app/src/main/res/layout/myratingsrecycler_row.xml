@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:orientation="horizontal"
     android:background="@drawable/recyclerview_bg"
@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="100dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp">
@@ -23,7 +23,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center|top">
             <ImageView
@@ -46,7 +46,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="vertical">
         <TextView
@@ -119,15 +119,26 @@
             android:textStyle="bold"
             android:layout_marginStart="10dp"
             android:maxLines="3"
-            android:lines="5"/>
+            android:lines="5"
+            android:scrollbars="vertical"
+            />
 
-        <Button
-            android:id="@+id/dltBtn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DELETE"
-            android:textSize="20dp"/>
-
+            android:orientation="vertical"
+            android:gravity="right">
+            <Button
+                android:id="@+id/dltBtn"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:background="@drawable/icon_delete"
+                android:textColor="#FFFFFF"
+                android:textSize="28dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 

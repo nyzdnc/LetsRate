@@ -20,11 +20,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.letsrate.databinding.FragmentAddRateBinding
+import com.example.letsrate.model.RateModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -88,24 +90,29 @@ class AddRateFragment : Fragment() {
                     imageReference.putFile(selectedPicture!!).addOnSuccessListener {
 
                         val uploadPictureReference = storage.reference.child("images").child(imageName)
-                        uploadPictureReference.downloadUrl.addOnSuccessListener {
+                        uploadPictureReference.downloadUrl.addOnSuccessListener { it ->
 
                             val downloadUrl = it.toString()
-                            val rateMap = hashMapOf<String , Any>()
 
-                            rateMap.put("userEmail" , auth.currentUser!!.email!!)
-                            rateMap.put("commentTitle" , binding.inputCommentTitle.text.toString())
-                            rateMap.put("productName" , binding.inputProductName.text.toString())
-                            rateMap.put("sellerName" , binding.inputSellerName.text.toString())
-                            rateMap.put("comment" , binding.inputComment.text.toString())
-                            rateMap.put("downloadUrl" , downloadUrl)
-                            rateMap.put("createdDate" , Timestamp.now())
-                            rateMap.put("rate" , binding.addRateRatingBar.rating.toString())
+                            val rateModel = RateModel(
+                                binding.inputCommentTitle.text.toString(),
+                                binding.inputProductName.text.toString(),
+                                binding.inputSellerName.text.toString(),
+                                binding.inputComment.text.toString(),
+                                binding.addRateRatingBar.rating.toString(),
+                                downloadUrl,
+                                auth.currentUser!!.email!!,
+                                null,
+                                Timestamp.now()
 
-                            firestore.collection("Ratings").add(rateMap)
+                            );
+
+                            firestore.collection("Ratings").add(rateModel)
                                 .addOnSuccessListener {
+
                                     val action = AddRateFragmentDirections.actionAddRateFragmentToHomeFragment()
                                     Navigation.findNavController(binding.root).navigate(action)
+
                                 }
                                 .addOnFailureListener {
                                     Toast.makeText(this.context,it.localizedMessage,Toast.LENGTH_LONG).show()
@@ -124,12 +131,10 @@ class AddRateFragment : Fragment() {
         }
 
         binding.imageView.setOnClickListener{
-
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
                 // If Android API 33+
                 if(ContextCompat.checkSelfPermission(it.context, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED){
                     // permission denied
-                    println("TEST")
                     if(ActivityCompat.shouldShowRequestPermissionRationale(this.requireActivity(), Manifest.permission.READ_MEDIA_IMAGES)){
                         Snackbar.make(requireView(), "Permission needed for gallery !", Snackbar.LENGTH_INDEFINITE).setAction("Give Permission"){
                             // request permission
@@ -181,6 +186,7 @@ class AddRateFragment : Fragment() {
                         selectedPicture = intentFromResult.data
                         selectedPicture?.let {
                             binding.imageView.setImageURI(it)
+
                         }
                     }
                 }
@@ -202,9 +208,7 @@ class AddRateFragment : Fragment() {
 
         registerLaunchers()
 
-
     }
-
 
     }
 

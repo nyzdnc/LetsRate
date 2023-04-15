@@ -1,10 +1,10 @@
 package com.example.letsrate.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.provider.Telephony.Mms.Rate
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.letsrate.adapter.RatingRecyclerAdapter
 import com.example.letsrate.databinding.FragmentHomeBinding
 import com.example.letsrate.model.RateModel
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -28,15 +29,10 @@ class HomeFragment : Fragment() {
     private lateinit var ratingRecyclerAdapter : RatingRecyclerAdapter
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
@@ -47,14 +43,13 @@ class HomeFragment : Fragment() {
 
         firebase = Firebase.firestore
 
-        ratingArrayList = ArrayList<RateModel>()
+        ratingArrayList = ArrayList()
+
+        getData()
 
         binding.homePageRecyclerView.layoutManager = LinearLayoutManager(this.context)
         ratingRecyclerAdapter = RatingRecyclerAdapter(ratingArrayList)
         binding.homePageRecyclerView.adapter = ratingRecyclerAdapter
-
-
-        getDate()
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -91,21 +86,13 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getDate(){
-
-        firebase.collection("Ratings").orderBy("createdDate", Query.Direction.DESCENDING).addSnapshotListener { value, error ->
-
-            if(error != null){
-                Toast.makeText(this.context,error.localizedMessage,Toast.LENGTH_LONG).show()
-            } else {
-                if(!value!!.isEmpty){
-
-                    val documents = value.documents
-
-                    ratingArrayList.clear()
-
-                    for (document in documents){
-
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getData() {
+        firebase.collection("Ratings").orderBy("createdDate", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                    for (document in result) {
+                        Log.d("test", "${document.id} => ${document.data}")
                         val comment = document.get("comment") as String
                         val commentTitle = document.get("commentTitle") as String
                         val downloadUrl = document.get("downloadUrl") as String
@@ -113,6 +100,8 @@ class HomeFragment : Fragment() {
                         val productName = document.get("productName") as String
                         val userEmail = document.get("userEmail") as String
                         val rate = document.get("rate") as String
+                        val rateId = document.id
+                        val createdDate = document.get("createdDate") as Timestamp
 
                         val rating = RateModel(
                             commentTitle,
@@ -121,17 +110,57 @@ class HomeFragment : Fragment() {
                             comment,
                             rate,
                             downloadUrl,
-                            userEmail)
+                            userEmail,
+                            rateId,
+                            createdDate
+                        )
 
                         ratingArrayList.add(rating)
-
-
                     }
+                ratingRecyclerAdapter.notifyDataSetChanged()
 
-                    ratingRecyclerAdapter.notifyDataSetChanged()
-                }
+
+            }.addOnFailureListener {
+                println(it.localizedMessage)
             }
-        }
+
+
+       /* firebase.collection("Ratings").orderBy("createdDate", Query.Direction.DESCENDING).addSnapshotListener { value , error ->
+                if (error != null) {
+                    Toast.makeText(this.context, error.localizedMessage, Toast.LENGTH_LONG).show()
+                } else {
+                    if (!value!!.isEmpty) {
+                        val documents = value.documents
+                        ratingArrayList.clear()
+
+                        for (document in documents) {
+                            val comment = document.get("comment") as String
+                            val commentTitle = document.get("commentTitle") as String
+                            val downloadUrl = document.get("downloadUrl") as String
+                            val sellerName = document.get("sellerName") as String
+                            val productName = document.get("productName") as String
+                            val userEmail = document.get("userEmail") as String
+                            val rate = document.get("rate") as String
+                            val rateId = document.id
+
+                            val rating = RateModel(
+                                commentTitle,
+                                productName,
+                                sellerName,
+                                comment,
+                                rate,
+                                downloadUrl,
+                                userEmail,
+                                rateId
+                            )
+
+                            ratingArrayList.add(rating)
+                        }
+
+                        ratingRecyclerAdapter.notifyDataSetChanged()
+                    }
+                }
+            } */
     }
 
 

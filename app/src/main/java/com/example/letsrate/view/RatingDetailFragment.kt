@@ -1,6 +1,7 @@
 package com.example.letsrate.view
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,13 +55,9 @@ class RatingDetailFragment : Fragment() {
             binding.commentInput.text = comment
             binding.myEventsPoint.text = rate
 
+            binding.commentInput.movementMethod = ScrollingMovementMethod()
+
             Glide.with(binding.root).load(downloadUrl).into(binding.imageView2)
-
-            binding.buttonDelete.setOnClickListener {
-
-
-
-            }
 
 
 

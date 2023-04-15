@@ -1,13 +1,12 @@
 package com.example.letsrate.adapter
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.letsrate.R
 import com.example.letsrate.databinding.RecyclerRowBinding
 import com.example.letsrate.model.RateModel
 import com.example.letsrate.view.HomeFragmentDirections
@@ -56,10 +55,10 @@ class RatingRecyclerAdapter(var rateList : ArrayList<RateModel>) : RecyclerView.
        return rateList.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setFilteredList(mList: ArrayList<RateModel>){
         this.rateList = mList
         notifyDataSetChanged()
     }
-
 
     }

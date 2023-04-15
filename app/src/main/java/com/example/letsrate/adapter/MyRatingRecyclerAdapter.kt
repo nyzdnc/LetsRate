@@ -2,27 +2,19 @@ package com.example.letsrate.adapter
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.letsrate.R
 import com.example.letsrate.databinding.MyratingsrecyclerRowBinding
-import com.example.letsrate.databinding.RecyclerRowBinding
 import com.example.letsrate.model.RateModel
-import com.example.letsrate.view.HomeFragmentDirections
 import com.example.letsrate.view.MyRatingsFragmentDirections
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
 class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerView.Adapter <MyRatingRecyclerAdapter.RateHolder>() {
-
 
     class RateHolder(val binding : MyratingsrecyclerRowBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -45,8 +37,6 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
 
         holder.binding.dltBtn.setOnClickListener {
 
-
-
             val builder = AlertDialog.Builder(it.context)
             builder.setTitle("Delete")
             builder.setMessage("Are you sure ?")
@@ -54,18 +44,24 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
             builder.setPositiveButton("Yes") { dialog, which ->
                 Toast.makeText(it.context,
                     "Deleted", Toast.LENGTH_SHORT).show()
+
                 val db = FirebaseFirestore.getInstance()
                 val myCollection = db.collection("Ratings")
-                val documentId = myCollection.document().id
-                println(documentId)
-                myCollection.document(documentId)
-                    .delete()
-                    .addOnSuccessListener {
-                        // Silme başarılı olduğunda yapılacak işlemler
-                    }
-                    .addOnFailureListener { exception ->
-                        // Hata durumunda yapılacak işlemler
-                    }
+                myRateList.get(position).rateId?.let { it1 ->
+                    myCollection.document(it1)
+                        .delete()
+                        .addOnSuccessListener {
+                            // Silme başarılı olduğunda yapılacak işlemler
+
+                        }
+                        .addOnFailureListener { exception ->
+                            // Hata durumunda yapılacak işlemler
+                        }
+                }
+
+                val action = MyRatingsFragmentDirections.myRatingsFragmentReload()
+                Navigation.findNavController(it).navigate(action)
+
             }
 
             builder.setNegativeButton("No") { dialog, which ->
@@ -74,6 +70,8 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
             }
 
             builder.show()
+
+
         }
 
         holder.itemView.setOnClickListener {
