@@ -51,11 +51,10 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
                     myCollection.document(it1)
                         .delete()
                         .addOnSuccessListener {
-                            // Silme başarılı olduğunda yapılacak işlemler
 
                         }
                         .addOnFailureListener { exception ->
-                            // Hata durumunda yapılacak işlemler
+
                         }
                 }
 
@@ -63,6 +62,7 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
                 Navigation.findNavController(it).navigate(action)
 
             }
+
 
             builder.setNegativeButton("No") { dialog, which ->
                 Toast.makeText(it.context,
@@ -85,8 +85,26 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
             bundle.putString("comment", myRateList.get(position).comment)
             bundle.putString("rate", myRateList.get(position).rate)
             bundle.putString("downloadUrl", myRateList.get(position).downloadUrl)
+            bundle.putString("rateId", myRateList.get(position).rateId)
+
             action.arguments.putAll(bundle)
             Navigation.findNavController(it).navigate(action)
+        }
+
+        holder.binding.editBtn.setOnClickListener {
+
+            val action = MyRatingsFragmentDirections.actionMyRatingsFragmentToUpdateRatingFragment()
+            val bundle = Bundle()
+            bundle.putString("commentTitle", myRateList.get(position).commentTitle)
+            bundle.putString("productName", myRateList.get(position).productName)
+            bundle.putString("sellerName", myRateList.get(position).sellerName)
+            bundle.putString("comment", myRateList.get(position).comment)
+            bundle.putString("rate", myRateList.get(position).rate)
+            bundle.putString("downloadUrl", myRateList.get(position).downloadUrl)
+            bundle.putString("rateId", myRateList.get(position).rateId)
+            action.arguments.putAll(bundle)
+            Navigation.findNavController(it).navigate(action)
+
         }
 
 

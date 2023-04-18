@@ -61,7 +61,6 @@ class MyRatingsFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    Log.d("test", "${document.id} => ${document.data}")
                     val comment = document.get("comment") as String
                     val commentTitle = document.get("commentTitle") as String
                     val downloadUrl = document.get("downloadUrl") as String
@@ -83,9 +82,8 @@ class MyRatingsFragment : Fragment() {
                         rateId,
                         createdDate
 
-
                     )
-                        if(userEmail == auth.currentUser!!.email){
+                        if(userEmail == auth.currentUser!!.email!!){
                             myRatingsArrayList.add(rating)
 
                         }
@@ -99,53 +97,7 @@ class MyRatingsFragment : Fragment() {
                 println(it.localizedMessage)
             }
 
-       /* firebase.collection("Ratings").orderBy("createdDate", Query.Direction.DESCENDING).addSnapshotListener { value, error ->
 
-            if(error != null){
-                Toast.makeText(this.context,error.localizedMessage, Toast.LENGTH_LONG).show()
-                println(error.localizedMessage)
-            } else {
-                if(!value!!.isEmpty){
-
-                    val documents = value.documents
-
-                    myRatingsArrayList.clear()
-
-                    for (document in documents){
-
-                        val comment = document.get("comment") as String
-                        val commentTitle = document.get("commentTitle") as String
-                        val downloadUrl = document.get("downloadUrl") as String
-                        val sellerName = document.get("sellerName") as String
-                        val productName = document.get("productName") as String
-                        val userEmail = document.get("userEmail") as String
-                        val rate = document.get("rate") as String
-                        val rateId = document.get("rateId") as String
-
-                        val rating = RateModel(
-                            commentTitle,
-                            productName,
-                            sellerName,
-                            comment,
-                            rate,
-                            downloadUrl,
-                            userEmail,
-                            rateId)
-
-                        if(document.get("userEmail") == auth.currentUser!!.email){
-
-                            myRatingsArrayList.add(rating)
-                        }
-
-
-
-
-                    }
-
-                    myRatingRecyclerAdapter.notifyDataSetChanged()
-                }
-            }
-        } */
     }
 
 

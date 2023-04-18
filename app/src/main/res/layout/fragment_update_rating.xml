@@ -7,18 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".view.AddRateFragment">
 
+    <TextView
+        android:id="@+id/updateTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/update_top_title_bg"
+        android:text="UPDATE RATING"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textColor="#FAF8F8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/updateImageView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         android:background="#BFF8FAFA"
-        android:onClick="selectImage"
         android:src="@drawable/camera_vector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/updateTitle" />
 
     <LinearLayout
         android:id="@+id/linearOfRatingBar"
@@ -28,10 +40,10 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/updateImageView">
 
         <RatingBar
-            android:id="@+id/addRateRatingBar"
+            android:id="@+id/updateRateRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
@@ -102,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCommentTitle" />
 
     <EditText
-        android:id="@+id/inputCommentTitle"
+        android:id="@+id/updateInputCommentTitle"
         android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
@@ -120,7 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearOfRatingBar" />
 
     <EditText
-        android:id="@+id/inputProductName"
+        android:id="@+id/updateInputProductName"
         android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -136,10 +148,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toEndOf="@+id/tvProductName"
-        app:layout_constraintTop_toBottomOf="@+id/inputCommentTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/updateInputCommentTitle" />
 
     <EditText
-        android:id="@+id/inputComment"
+        android:id="@+id/updateInputComment"
         android:layout_width="230dp"
         android:layout_height="140dp"
         android:layout_marginTop="10dp"
@@ -156,10 +168,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toEndOf="@+id/tvComment"
-        app:layout_constraintTop_toBottomOf="@+id/inputSellerName" />
+        app:layout_constraintTop_toBottomOf="@+id/updateInputSellerName" />
 
     <EditText
-        android:id="@+id/inputSellerName"
+        android:id="@+id/updateInputSellerName"
         android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -175,22 +187,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toEndOf="@+id/tvSellerName"
-        app:layout_constraintTop_toBottomOf="@+id/inputProductName" />
+        app:layout_constraintTop_toBottomOf="@+id/updateInputProductName" />
 
     <Button
-        android:id="@+id/buttonAddRate"
+        android:id="@+id/buttonUpdateRate"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:text="ADD RATE"
+        android:text="UPDATE"
+        android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:fontFamily="sans-serif-light"
         android:background="@drawable/add_rate_bg"
-        app:layout_constraintEnd_toEndOf="@+id/inputComment"
+        app:layout_constraintEnd_toEndOf="@+id/updateInputComment"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/inputComment"
-        app:layout_constraintTop_toBottomOf="@+id/inputComment" />
+        app:layout_constraintStart_toStartOf="@+id/updateInputComment"
+        app:layout_constraintTop_toBottomOf="@+id/updateInputComment" />
 
     <LinearLayout
         android:background="@drawable/input_bg"
@@ -200,7 +213,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/inputComment"
+        app:layout_constraintBottom_toBottomOf="@+id/updateInputComment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvComment">
 
@@ -210,7 +223,7 @@
             android:src="@drawable/my_rates" />
 
         <TextView
-            android:id="@+id/myEventsPoint"
+            android:id="@+id/updateRatePoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.0"

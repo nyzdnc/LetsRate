@@ -79,10 +79,21 @@
         <action
             android:id="@+id/myRatingsFragmentReload"
             app:destination="@id/myRatingsFragment" />
+        <action
+            android:id="@+id/action_myRatingsFragment_to_updateRatingFragment"
+            app:destination="@id/updateRatingFragment" />
     </fragment>
     <fragment
         android:id="@+id/ratingDetailFragment"
         android:name="com.example.letsrate.view.RatingDetailFragment"
         android:label="fragment_rating_detail"
         tools:layout="@layout/fragment_rating_detail" />
+    <fragment
+        android:id="@+id/updateRatingFragment"
+        android:name="com.example.letsrate.view.UpdateRatingFragment"
+        android:label="UpdateRatingFragment" >
+        <action
+            android:id="@+id/action_updateRatingFragment_to_myRatingsFragment"
+            app:destination="@id/myRatingsFragment" />
+    </fragment>
 </navigation>

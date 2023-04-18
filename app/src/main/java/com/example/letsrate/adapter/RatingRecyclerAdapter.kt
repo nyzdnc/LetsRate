@@ -4,12 +4,15 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.letsrate.R
 import com.example.letsrate.databinding.RecyclerRowBinding
 import com.example.letsrate.model.RateModel
 import com.example.letsrate.view.HomeFragmentDirections
+import com.google.firebase.database.collection.LLRBNode
 
 class RatingRecyclerAdapter(var rateList : ArrayList<RateModel>) : RecyclerView.Adapter <RatingRecyclerAdapter.RateHolder>() {
 
@@ -34,7 +37,6 @@ class RatingRecyclerAdapter(var rateList : ArrayList<RateModel>) : RecyclerView.
 
         holder.itemView.setOnClickListener {
 
-
             val action = HomeFragmentDirections.actionHomeFragmentToRatingDetailFragment()
             val bundle = Bundle()
             bundle.putString("commentTitle", rateList.get(position).commentTitle)
@@ -46,6 +48,8 @@ class RatingRecyclerAdapter(var rateList : ArrayList<RateModel>) : RecyclerView.
             action.arguments.putAll(bundle)
             Navigation.findNavController(it).navigate(action)
         }
+
+
 
 
 
