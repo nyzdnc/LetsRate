@@ -105,7 +105,7 @@ class AddRateFragment : Fragment() {
                                 null,
                                 Timestamp.now()
 
-                            );
+                            )
 
                             firestore.collection("Ratings").add(rateModel)
                                 .addOnSuccessListener {

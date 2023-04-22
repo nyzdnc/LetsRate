@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-
         auth.addAuthStateListener {
             if (it.currentUser == null) {
 
@@ -46,5 +45,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 }

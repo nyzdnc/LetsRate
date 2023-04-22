@@ -49,6 +49,7 @@ class RatingDetailFragment : Fragment() {
             val rate = bundle.getString("rate").toString()
             val downloadUrl = bundle.getString("downloadUrl").toString()
 
+
             binding.sellerNameInput.text = sellerName
             binding.productNameInput.text = productName
             binding.commentTitleInput.text = commentTitle
@@ -58,12 +59,7 @@ class RatingDetailFragment : Fragment() {
             binding.commentInput.movementMethod = ScrollingMovementMethod()
 
             Glide.with(binding.root).load(downloadUrl).into(binding.imageView2)
-
-
-
         }
 
-
     }
-
 }

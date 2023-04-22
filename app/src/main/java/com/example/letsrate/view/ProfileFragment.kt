@@ -23,11 +23,8 @@ class ProfileFragment : Fragment() {
     private lateinit var auth : FirebaseAuth
     private lateinit var navController : NavController
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -35,7 +32,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         binding = FragmentProfileBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -59,11 +56,6 @@ class ProfileFragment : Fragment() {
 
             navController.navigate(R.id.myRatingsFragment)
         }
-
-
-
-
-
 
     }
 

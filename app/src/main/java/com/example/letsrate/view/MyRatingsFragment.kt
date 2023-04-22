@@ -50,7 +50,6 @@ class MyRatingsFragment : Fragment() {
         myRatingRecyclerAdapter = MyRatingRecyclerAdapter(myRatingsArrayList)
         binding.myRatingsRecyclerView.adapter = myRatingRecyclerAdapter
 
-
         getData()
 
     }
@@ -81,7 +80,6 @@ class MyRatingsFragment : Fragment() {
                         userEmail,
                         rateId,
                         createdDate
-
                     )
                         if(userEmail == auth.currentUser!!.email!!){
                             myRatingsArrayList.add(rating)
@@ -91,16 +89,8 @@ class MyRatingsFragment : Fragment() {
                 }
                 myRatingRecyclerAdapter.notifyDataSetChanged()
 
-
-
             }.addOnFailureListener {
                 println(it.localizedMessage)
             }
-
-
     }
-
-
-
-
 }

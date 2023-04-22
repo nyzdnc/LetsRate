@@ -33,7 +33,6 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +45,6 @@ class LoginFragment : Fragment() {
             val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
             Navigation.findNavController(binding.root).navigate(action)
         }
-
 
         binding.buttonSignUp.setOnClickListener {
             createUser()
@@ -106,5 +104,4 @@ class LoginFragment : Fragment() {
             }
         }
     }
-
 }

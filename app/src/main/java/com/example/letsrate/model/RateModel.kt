@@ -9,7 +9,7 @@ data class RateModel(
     val sellerName: String,
     val comment: String,
     val rate: String,
-    val downloadUrl: String,
+    val downloadUrl: String? = null,
     val userEmail: String,
     var rateId: String? = null,
     val createdDate : Timestamp

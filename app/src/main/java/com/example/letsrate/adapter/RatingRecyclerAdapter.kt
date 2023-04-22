@@ -27,7 +27,6 @@ class RatingRecyclerAdapter(var rateList : ArrayList<RateModel>) : RecyclerView.
 
     override fun onBindViewHolder(holder: RateHolder, position: Int) {
 
-
         holder.binding.recyclerRowCommentTitle.text = rateList.get(position).commentTitle
         holder.binding.recyclerRowProductName.text = rateList.get(position).productName
         holder.binding.recyclerRowSellerName.text = rateList.get(position).sellerName
@@ -48,10 +47,6 @@ class RatingRecyclerAdapter(var rateList : ArrayList<RateModel>) : RecyclerView.
             action.arguments.putAll(bundle)
             Navigation.findNavController(it).navigate(action)
         }
-
-
-
-
 
     }
 

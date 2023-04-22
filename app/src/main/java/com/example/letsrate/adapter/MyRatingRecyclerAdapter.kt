@@ -27,7 +27,6 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
 
     override fun onBindViewHolder(holder: RateHolder, position: Int) {
 
-
         holder.binding.recyclerRowCommentTitle.text = myRateList.get(position).commentTitle
         holder.binding.recyclerRowProductName.text = myRateList.get(position).productName
         holder.binding.recyclerRowSellerName.text = myRateList.get(position).sellerName
@@ -63,7 +62,6 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
 
             }
 
-
             builder.setNegativeButton("No") { dialog, which ->
                 Toast.makeText(it.context,
                     "Canceled", Toast.LENGTH_SHORT).show()
@@ -71,11 +69,9 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
 
             builder.show()
 
-
         }
 
         holder.itemView.setOnClickListener {
-
 
             val action = MyRatingsFragmentDirections.actionMyRatingsFragmentToRatingDetailFragment()
             val bundle = Bundle()
@@ -107,8 +103,6 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
 
         }
 
-
-
     }
 
     override fun getItemCount(): Int {
@@ -119,6 +113,5 @@ class MyRatingRecyclerAdapter(var myRateList : ArrayList<RateModel>) : RecyclerV
         this.myRateList = mList
         notifyDataSetChanged()
     }
-
 
     }

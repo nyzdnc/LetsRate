@@ -24,11 +24,8 @@ import com.bumptech.glide.Glide
 import com.example.letsrate.R
 import com.example.letsrate.databinding.FragmentUpdateRatingBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.common.base.MoreObjects.ToStringHelper
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 
 class UpdateRatingFragment : Fragment() {
@@ -48,7 +45,7 @@ class UpdateRatingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentUpdateRatingBinding.inflate(inflater, container, false)
         return binding.root
@@ -76,9 +73,6 @@ class UpdateRatingFragment : Fragment() {
             val comment = bundle.getString("comment").toString()
 
             binding.updateInputComment.setText(comment)
-
-
-
             binding.updateInputSellerName.setText(sellerName)
             binding.updateInputProductName.setText(productName)
             binding.updateInputCommentTitle.setText(commentTitle)
@@ -91,7 +85,6 @@ class UpdateRatingFragment : Fragment() {
             binding.updateRateRatingBar.rating = rate.toFloat()
 
             binding.buttonUpdateRate.setOnClickListener {
-                //Toast.makeText(context,rateId,Toast.LENGTH_LONG).show()
                 firebase = FirebaseFirestore.getInstance()
                 val myCollection = firebase.collection("Ratings")
                 rateId?.let { it1 ->
@@ -104,13 +97,12 @@ class UpdateRatingFragment : Fragment() {
                                 "productName" to binding.updateInputProductName.text.toString(),
                                 "rate" to binding.updateRateRatingBar.rating.toString(),
                                 "sellerName" to binding.updateInputSellerName.text.toString(),
-                                "downloadUrl" to selectedPicture
+                                "downloadUrl" to selectedPicture.toString()
                             ))
 
                         .addOnSuccessListener {
                             Toast.makeText(context,"Rate Updated !", Toast.LENGTH_LONG).show()
                             navController.navigate(R.id.myRatingsFragment)
-                            //navController.navigate(R.id.myRatingsFragment)
 
                         }
                         .addOnFailureListener { exception ->
@@ -201,6 +193,5 @@ class UpdateRatingFragment : Fragment() {
             registerLaunchers()
 
         }
-
     }
 }
